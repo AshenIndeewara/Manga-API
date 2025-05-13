@@ -1,66 +1,61 @@
 # 📚 FastAPI Manga API
 
-A simple and fast web API built using [FastAPI](https://fastapi.tiangolo.com/), designed to provide endpoints for searching and accessing manga information, chapters, and images.
+A blazing fast, minimalistic web API built using [FastAPI](https://fastapi.tiangolo.com/).  
+This API scrapes data directly from [mangakakalot.gg](https://mangakakalot.gg) to provide access to manga titles, chapters, and images.
+
+> ⚠️ **Disclaimer**: This project is for educational purposes only. It is not affiliated with, endorsed by, or associated with mangakakalot.gg. Use responsibly.
+
+---
 
 ## 🚀 Features
 
-- 🔍 Search for manga titles  
-- 📘 Get details of a specific manga  
-- 📖 Fetch specific manga chapters  
-- 🖼️ Retrieve images via URL  
+- 🔍 Search for manga titles on mangakakalot.gg  
+- 📘 Get metadata of a specific manga  
+- 📖 Fetch manga chapters and content  
+- 🖼️ Retrieve images from manga pages  
 
-## 🛠️ Endpoints
+---
+
+## 🔌 Endpoints
 
 ### `GET /`
-Returns a basic welcome or root response.
+Basic root endpoint for testing availability.
 
 ---
 
 ### `GET /search/{query}`
-Searches for manga using a query string.
+Searches for manga on **mangakakalot.gg** using a query string.
 
 **Path Parameters:**
-- `query` (string): The search keyword.
+- `query` (string): Search keyword
 
 **Responses:**
-- `200 OK`: List of matching manga.
-- `422 Unprocessable Entity`: Validation error.
+- `200 OK`: JSON list of matched manga
+- `422`: Validation error
 
 ---
 
 ### `GET /manga/{name}`
-Fetches information for a specific manga.
+Fetches details of a specific manga by its name slug.
 
 **Path Parameters:**
-- `name` (string): Name of the manga.
-
-**Responses:**
-- `200 OK`: Manga details.
-- `422 Unprocessable Entity`: Validation error.
+- `name` (string): Manga slug (from URL)
 
 ---
 
 ### `GET /chapter/{name}/{chapter}`
-Retrieves a specific chapter of a manga.
+Fetches chapter images from a manga.
 
 **Path Parameters:**
-- `name` (string): Manga name.  
-- `chapter` (string): Chapter number or ID.
-
-**Responses:**
-- `200 OK`: Chapter data.
-- `422 Unprocessable Entity`: Validation error.
+- `name` (string): Manga slug  
+- `chapter` (string): Chapter number or ID
 
 ---
 
 ### `GET /image?url=...`
-Fetches and serves an image from a given URL.
+Downloads and serves an image from a remote URL (useful for proxying images to avoid hotlinking restrictions).
 
 **Query Parameters:**
-- `url` (string): Direct image URL.
-
-**Responses:**
-- `200 OK`: Returns image metadata or proxy.
-- `422 Unprocessable Entity`: Validation error.
+- `url` (string): Direct image URL
 
 ---
